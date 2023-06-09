@@ -7,6 +7,7 @@ from pathlib import Path
 from pydoc import locate
 
 from calvin_agent.models.mcil import MCIL
+from calvin_agent.datasets.calvin_data_module import CalvinDataModule
 from calvin_agent.utils.utils import add_text, format_sftp_path
 import cv2
 import hydra
@@ -32,7 +33,10 @@ def get_default_model_and_env(train_folder, dataset_path, checkpoint, env=None, 
     # since we don't use the trainer during inference, manually set up data_module
     cfg.datamodule.datasets = datasets_cfg
     cfg.datamodule.root_data_dir = dataset_path
+
+    print(cfg.datamodule)
     data_module = hydra.utils.instantiate(cfg.datamodule, num_workers=0)
+
     data_module.prepare_data()
     data_module.setup()
     dataloader = data_module.val_dataloader()

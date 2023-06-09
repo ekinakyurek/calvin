@@ -234,7 +234,9 @@ def main():
             checkpoints = [Path(args.checkpoint)]
 
         env = None
+        print(checkpoints[0].stem)
         for checkpoint in checkpoints:
+            print(f"Evaluating checkpoint {checkpoint.stem}")
             epoch = checkpoint.stem.split("=")[1]
             model, env, _ = get_default_model_and_env(
                 args.train_folder,
