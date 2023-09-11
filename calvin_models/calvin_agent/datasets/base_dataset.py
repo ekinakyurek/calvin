@@ -81,7 +81,8 @@ class BaseDataset(Dataset):
         self.batch_size = batch_size
         self.num_workers = num_workers
         self.min_window_size = min_window_size
-        self.max_window_size = max_window_size
+        self.max_window_size = 64
+        #self.max_window_size = max_window_size
         self.abs_datasets_dir = datasets_dir
         self.lang_folder = lang_folder  # if self.with_lang else None
         self.aux_lang_loss_window = aux_lang_loss_window
@@ -132,7 +133,7 @@ class BaseDataset(Dataset):
         """
 
         episode = self._load_episode(idx, window_size)
-
+        #print(episode)
         seq_state_obs = process_state(episode, self.observation_space, self.transforms, self.proprio_state)
         seq_rgb_obs = process_rgb(episode, self.observation_space, self.transforms)
         seq_depth_obs = process_depth(episode, self.observation_space, self.transforms)
