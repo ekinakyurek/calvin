@@ -152,8 +152,7 @@ class DiskDataset(BaseDataset):
         episode_lookup = []
 
         # TRAIN
-        abs_datasets_dir = Path("/raid/lingo/data/calvin/D/validation")
-
+        # abs_datasets_dir = Path("/raid/lingo/data/calvin/D/validation")
         ep_start_end_ids = np.load(abs_datasets_dir / "ep_start_end_ids.npy")
         logger.info(f'Found "ep_start_end_ids.npy" with {len(ep_start_end_ids)} episodes.')
         for start_idx, end_idx in ep_start_end_ids:
