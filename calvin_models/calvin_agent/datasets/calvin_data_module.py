@@ -12,6 +12,7 @@ from omegaconf import DictConfig, OmegaConf
 import pytorch_lightning as pl
 from pytorch_lightning.trainer.supporters import CombinedLoader
 from torch.utils.data import DataLoader
+import calvin_agent.utils.transforms
 import torchvision
 
 logger = logging.getLogger(__name__)

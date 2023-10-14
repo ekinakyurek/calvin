@@ -66,7 +66,12 @@ class DiskDataset(BaseDataset):
         Returns:
             Path to file.
         """
-        return Path(f"{self.naming_pattern[0]}{file_idx:0{self.n_digits}d}{self.naming_pattern[1]}")
+        #self.naming_pattern[0] = "/datasets/calvin_new/task_D_D/training/episode_"
+        path = f"{self.naming_pattern[0]}{file_idx:0{self.n_digits}d}{self.naming_pattern[1]}"
+        #print(f"====> PATH: {path}")
+        # TRAIN
+        # path = path.replace("validation", "training")
+        return Path(path)
 
     def _load_episode(self, idx: int, window_size: int) -> Dict[str, np.ndarray]:
         """
@@ -79,7 +84,9 @@ class DiskDataset(BaseDataset):
         Returns:
             episode: Dict of numpy arrays containing the episode where keys are the names of modalities.
         """
-        start_idx = self.episode_lookup[idx]
+        #start_idx = self.episode_lookup[idx]
+        window_size = 64
+        start_idx = idx
         end_idx = start_idx + window_size
         keys = list(chain(*self.observation_space.values()))
         keys.remove("language")
@@ -144,6 +151,8 @@ class DiskDataset(BaseDataset):
 
         episode_lookup = []
 
+        # TRAIN
+        # abs_datasets_dir = Path("/raid/lingo/data/calvin/D/validation")
         ep_start_end_ids = np.load(abs_datasets_dir / "ep_start_end_ids.npy")
         logger.info(f'Found "ep_start_end_ids.npy" with {len(ep_start_end_ids)} episodes.')
         for start_idx, end_idx in ep_start_end_ids:

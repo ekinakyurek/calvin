@@ -94,7 +94,7 @@ if __name__ == "__main__":
         checkpoints = [get_last_checkpoint(Path(args.train_folder))]
     elif args.checkpoint is not None:
         print(f"Evaluating model with checkpoint {args.checkpoint}.")
-        checkpoints = [args.checkpoint]
+        checkpoints = [Path(args.checkpoint)]
     elif args.checkpoint is None and args.last_k_checkpoints is not None:
         print(f"Evaluating model with last {args.last_k_checkpoints} checkpoints.")
         checkpoints = get_all_checkpoints(Path(args.train_folder))[-args.last_k_checkpoints :]
